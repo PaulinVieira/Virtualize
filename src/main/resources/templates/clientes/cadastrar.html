@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<title>TheGameStore</title>
+
+<!--Bootstrap-->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+
+	
+	
+<!--Style-->
+<link rel="stylesheet" type="text/css" href="/css/estilo.css">
+
+  <!-- Adicionando JQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+<!-- Adicionando Javascript -->
+    <script>
+    
+    function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('rua').value=("");
+            document.getElementById('bairro').value=("");
+            document.getElementById('cidade').value=("");
+            document.getElementById('uf').value=("");
+            
+    }
+
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('rua').value=(conteudo.logradouro);
+            document.getElementById('bairro').value=(conteudo.bairro);
+            document.getElementById('cidade').value=(conteudo.localidade);
+            document.getElementById('uf').value=(conteudo.uf);
+         
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('rua').value="...";
+                document.getElementById('bairro').value="...";
+                document.getElementById('cidade').value="...";
+                document.getElementById('uf').value="...";
+               
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    };
+
+    </script>
+    
+    <script type="text/javascript">
+		function fMasc(objeto, mascara) {
+			obj = objeto
+			masc = mascara
+			setTimeout("fMascEx()", 1)
+		}
+		function fMascEx() {
+			obj.value = masc(obj.value)
+		}
+		function mTel(tel) {
+			tel = tel.replace(/\D/g, "")
+			tel = tel.replace(/^(\d)/, "($1")
+			tel = tel.replace(/(.{3})(\d)/, "$1)$2")
+			if (tel.length == 9) {
+				tel = tel.replace(/(.{1})$/, "-$1")
+			} else if (tel.length == 10) {
+				tel = tel.replace(/(.{2})$/, "-$1")
+			} else if (tel.length == 11) {
+				tel = tel.replace(/(.{3})$/, "-$1")
+			} else if (tel.length == 12) {
+				tel = tel.replace(/(.{4})$/, "-$1")
+			} else if (tel.length > 12) {
+				tel = tel.replace(/(.{4})$/, "-$1")
+			}
+			return tel;
+		}
+		function mCNPJ(cnpj) {
+			cnpj = cnpj.replace(/\D/g, "")
+			cnpj = cnpj.replace(/^(\d{2})(\d)/, "$1.$2")
+			cnpj = cnpj.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+			cnpj = cnpj.replace(/\.(\d{3})(\d)/, ".$1/$2")
+			cnpj = cnpj.replace(/(\d{4})(\d)/, "$1-$2")
+			return cnpj
+		}
+		function mCPF(cpf) {
+			cpf = cpf.replace(/\D/g, "")
+			cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2")
+			cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2")
+			cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+			return cpf
+		}
+		function mCEP(cep) {
+			cep = cep.replace(/\D/g, "")
+			cep = cep.replace(/^(\d{2})(\d)/, "$1.$2")
+			cep = cep.replace(/\.(\d{3})(\d)/, ".$1-$2")
+			return cep
+		}
+		function mNum(num) {
+			num = num.replace(/\D/g, "")
+			return num
+		}
+	</script>
+
+
+</head>
+<body>
+	<header>
+		<div class="wrapper">
+			<nav>
+				<div class="menu-toggle">
+					<form
+						class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+						<i class="fas fa-search" aria-hidden="true"></i>
+						<div class="pesquisar">
+							<input class="form-control form-control-sm ml-3 w-75" type="text"
+								placeholder="Pesquisar" aria-label="Pesquisar">
+						</div>
+					</form>
+				</div>
+				<div class="brand">
+					<h1>TheGameStore</h1>
+				</div>
+				<div class="carrinho-login">
+					<span class="fas fa-user"></span> <a class="fas fa-shopping-cart"
+						style="color: black" href="../carrinho.html"></a>
+				</div>
+			</nav>
+		</div>
+		<nav class="navbar navbar-dark bg-dark">
+			<a class="nav-item nav-link" href='/home' style="color: white">HOME</a>
+			<a class="nav-item nav-link" href="#" style="color: white">MAIS
+				VENDIDOS</a> <a class="nav-item nav-link" href="#" style="color: white">CONSOLES</a>
+			<a class="nav-item nav-link active" href="#" style="color: white">JOGOS</a>
+			<a class="nav-item nav-link" href="#" style="color: white">ACESSÓRIOS</a>
+			<a class="nav-item nav-link" href="#" style="color: white">LANÇAMENTOS</a>
+			<security:authorize
+				access="hasAnyRole('administrador', 'estoquista')">
+				<a class="nav-item nav-link" href='/estoquista' style="color: white">PRODUTOS</a>
+			</security:authorize>
+			
+			
+				<security:authorize 	
+				
+				access="hasRole('administrador')">
+			<a class="nav-item nav-link"
+				href='/administrativo' style="color: white">USUARIOS</a>>
+			
+				</security:authorize>
+		</nav>
+	</header>
+
+    </head>
+
+    <body>
+
+      
+      
+      <div class="container">
+			<h1 class="display-4" style="margin-top: 3rem">Cadastro de
+				Clientes</h1>
+			<br>
+			<div class="col-6">
+			<form th:action="@{/clientes/cadastrar}" th:object="${cliente}"
+				 method='POST'>
+				<div class="form-row">
+				<div class="form-group col-md-10">
+					<label for="nome_completo">Nome Completo</label> <br> <input
+						type="text" class="form-control"
+						placeholder="Digite seu nome completo" th:field="*{nome_completo}"
+						id="nome_completo" required>
+						<div class="invalid-feedback"></div>
+				</div>
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="cpf">CPF:</label> <input type="text" name="cpf"
+						class="form-control" placeholder="Digite seu CPF"
+						th:field="*{cpf}" id="cpf"
+						onkeydown="javascript: fMasc( this, mCPF );" maxlength="14" required>
+						<div class="invalid-feedback"></div>
+				</div>
+				
+
+				<div class="form-group col-md-6">
+					<label for="text">CEP:</label> <input type="text"
+						class="form-control" placeholder="Digite seu cep "
+						th:field="*{cep}" id="cep" name="cep" value="" size="10" maxlength="9"
+						onblur="pesquisacep(this.value);"
+						
+						>
+						<div class="invalid-feedback"></div>
+				</div>
+				
+				
+				<div class="form-group col-md-6">
+					<label for="text">Rua:</label> <input type="text"
+						class="form-control" name ="rua" placeholder="Digite seu endereço "
+						th:field="*{endereco}" id="rua" size="60" required >
+						<div class="invalid-feedback"></div>
+				</div>
+			
+				<div class="form-group col-md-6">
+					<label for="text">Bairro:</label> <input type="text"
+						class="form-control" name ="bairro" placeholder="Digite seu bairro"
+						th:field="*{bairro}" id="bairro" size="40" required >
+						<div class="invalid-feedback"></div>
+				</div>
+				
+			
+				
+				<div class="form-group col-md-6">
+					<label for="text">Cidade:</label> <input type="text"
+						class="form-control" name ="cidade" placeholder="Digite sua cidade"
+						th:field="*{cidade}" id="cidade" size="40" required >
+						<div class="invalid-feedback"></div>
+				</div>
+				
+				
+				<div class="form-group col-md-6">
+					<label for="text">Estado:</label> <input type="text"
+						class="form-control" name ="uf" placeholder="Digite o estado"
+						th:field="*{uf}" id="uf" size="2" required>
+						<div class="invalid-feedback"></div>
+				</div>
+			
+						
+
+				<div class="form-group col-md-6">
+					<label for="text">Usuario:</label> <input type="text"
+						class="form-control" placeholder="Digite seu usuario "
+						th:field="*{usuario}" id="usuario" required>
+						<div class="invalid-feedback"></div>
+				</div>
+				
+
+				<div class="form-group col-md-6">
+					<label for="text">Senha:</label> <input type="password"
+						class="form-control" placeholder="Digite sua senha "
+						th:field="*{senha}" id="senha" required>
+						<div class="invalid-feedback"></div>
+				</div>
+				
+				<div class="form-group">
+					<button type="submit" value="submit"
+						class="btn btn-outline-success">Cadastrar</button>
+			</div>
+			</form>
+
+		
+</div>
+	<!-- Footer component start -->
+	<footer class="page-footer">
+		<div class="container text-center text-md-left mt-5">
+			<div class="row mt-3">
+				<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+					<h5 class="text-uppercase font-weight-bold">The GameStore</h5>
+					<hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+					<p>Projeto Integrador IV - 2020</p>
+				</div>
+				<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+					<h5 class="text-uppercase font-weight-bold">Formas de
+						Pagamento</h5>
+					<hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+					<p>Cartões de Crédito</p>
+					<p>Cartões de Débito</p>
+					<p>Boleto</p>
+				</div>
+				<div
+					class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 footer-links">
+					<!-- Links -->
+					<h5 class="text-uppercase font-weight-bold">Redes Sociais</h5>
+					<hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+					<!-- Facebook -->
+					<p class="my-md-4 footer-links">
+						<a class="fb-ic"><i class="fab fa-facebook-f white-text mr-4"
+							style="color: black"></i></a>
+						<!-- Twitter -->
+						<a class="tw-ic"><i class="fab fa-twitter white-text mr-4"
+							style="color: black"></i></a>
+						<!--Instagram-->
+						<a class="ins-ic"><i class="fab fa-instagram white-text"
+							style="color: black"></i></a>
+					</p>
+				</div>
+			</div>
+	</footer>
+	</div>
+	<!--Footer-->
+	<div class="mobile-menu">
+		<div class="menu-item">
+			<span class="fas fa-ghost"></span>
+			<p>Jogos</p>
+		</div>
+		<div class="menu-item">
+			<span class="fas fa-gamepad"></span>
+			<p>Consoles</p>
+		</div>
+		<div class="menu-item">
+			<span class="fas fa-headset"></span>
+			<p>Acessórios</p>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+		crossorigin="anonymous"></script>
+
+</body>
+</html>
