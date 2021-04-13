@@ -84,13 +84,7 @@ public class ClientesRepository {
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				c.setId_cliente(rs.getInt("id_cliente"));
-				c.setCep(rs.getString("cep"));
-				c.setEndereco(rs.getString("endereco"));
-				c.setCpf(rs.getString("cpf"));
-				c.setBairro(rs.getString("bairro"));
-				c.setCidade(rs.getString("cidade"));
-				c.setUf(rs.getString("uf"));
+				c.setId_cliente(rs.getInt("id_cliente"));				
 				c.setNome_completo(rs.getString("nome_completo"));
 				c.setPassword(rs.getString("password"));
 				c.setUsername(rs.getString("username"));
