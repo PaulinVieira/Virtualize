@@ -22,10 +22,10 @@ public class ClientesRepository {
 
 		try {
 			stmt = con.prepareStatement(
-					"insert into table_Cliente (nome_completo, usuario, senha) values (?,?,?);");
+					"insert into table_Cliente (nome_completo, username, password) values (?,?,?);");
 			stmt.setString(1, c.getNome_completo());
-			stmt.setString(2, c.getUsuario());
-			stmt.setString(3, new BCryptPasswordEncoder().encode(c.getSenha()));
+			stmt.setString(2, c.getUsername());
+			stmt.setString(3, new BCryptPasswordEncoder().encode(c.getPassword()));
 			stmt.executeUpdate();
 		} catch (SQLException ex) {
 			Logger.getLogger(ClientesRepository.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,8 +59,8 @@ public class ClientesRepository {
 				p.setUf(rs.getString("uf"));
 				p.setCidade(rs.getString("cidade"));
 
-				p.setUsuario(rs.getString("usuario"));
-				p.setSenha(rs.getString("senha"));
+				p.setUsername(rs.getString("username"));
+				p.setPassword(rs.getString("password"));
 
 				clientes.add(p);
 			}
@@ -80,7 +80,7 @@ public class ClientesRepository {
 
 		try {
 			table_Cliente c = new table_Cliente();
-			stmt = con.prepareStatement("SELECT * FROM table_Cliente WHERE usuario = '" + usuario + "'");
+			stmt = con.prepareStatement("SELECT * FROM table_Cliente WHERE username = '" + usuario + "'");
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
@@ -92,8 +92,8 @@ public class ClientesRepository {
 				c.setCidade(rs.getString("cidade"));
 				c.setUf(rs.getString("uf"));
 				c.setNome_completo(rs.getString("nome_completo"));
-				c.setSenha(rs.getString("senha"));
-				c.setUsuario(rs.getString("usuario"));
+				c.setPassword(rs.getString("password"));
+				c.setUsername(rs.getString("username"));
 				clientes.add(c);
 			}
 
@@ -124,8 +124,8 @@ public class ClientesRepository {
 			c.setCidade(rs.getString("cidade"));
 			c.setUf(rs.getString("uf"));
 			c.setNome_completo(rs.getString("nome_completo"));
-			c.setSenha(rs.getString("senha"));
-			c.setUsuario(rs.getString("usuario"));
+			c.setPassword(rs.getString("password"));
+			c.setUsername(rs.getString("username"));
 
 		} catch (SQLException ex) {
 			Logger.getLogger(ClientesRepository.class.getName()).log(Level.SEVERE, null, ex);
@@ -149,8 +149,8 @@ public class ClientesRepository {
 			stmt.setString(4, c.getBairro());
 			stmt.setString(5, c.getCidade());
 			stmt.setString(6, c.getUf());
-			stmt.setString(7, c.getUsuario());
-			stmt.setString(8, new BCryptPasswordEncoder().encode(c.getSenha()));
+			stmt.setString(7, c.getUsername());
+			stmt.setString(8, new BCryptPasswordEncoder().encode(c.getPassword()));
 			stmt.setInt(9, c.getId_cliente());
 
 			stmt.executeUpdate();

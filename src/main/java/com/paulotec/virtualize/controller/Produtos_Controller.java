@@ -144,9 +144,6 @@ public class Produtos_Controller {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
-		produtoRepository.salvarProduto(p);
 		ModelAndView mv = new ModelAndView("redirect:/estoquista");
 		
 

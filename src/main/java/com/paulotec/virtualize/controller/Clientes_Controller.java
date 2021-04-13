@@ -13,37 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class Clientes_Controller {
 
-	@GetMapping("/clientes/cadastrar")
-	public ModelAndView exibirCadastro() {
-
-		table_Cliente c = new table_Cliente();
-
-		ModelAndView mv = new ModelAndView("clientes/cadastrar");
-
-		mv.addObject("cliente", c);
-
-		return mv;
-	}
 	
-	@GetMapping("/clientes/loginCliente")
-	public ModelAndView exibirLoginCliente() {
-
-		table_Cliente c = new table_Cliente();
-
-		ModelAndView mv = new ModelAndView("clientes/loginCliente");
-
-		mv.addObject("cliente", c);
-
-		return mv;
-	}
-	
-
-	@PostMapping("/clientes/cadastrar")
+	@PostMapping("/cadastroCliente")
 	public String cadastrarCliente(@ModelAttribute(value = "cliente") table_Cliente c) {
 
 		ClientesRepository clientesRepository = new ClientesRepository();
 		clientesRepository.salvar(c);
-		return "redirect:/finalizarCompra";
+		return "redirect:/";
 	}
 
 	@GetMapping("/clientes/editar/{id_cliente}")

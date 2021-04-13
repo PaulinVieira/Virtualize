@@ -14,8 +14,8 @@ public class table_Cliente {
 	    private String cpf;
 	    private String endereco;
 	    private String cep;
-	    private String usuario;
-	    private String senha;
+	    private String username;
+	    private String password;
 	    private String bairro;
 	    private String cidade;
 	    private String uf;

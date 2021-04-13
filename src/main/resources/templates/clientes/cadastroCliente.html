@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Login e Cadastro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  
+  <link rel="stylesheet" type="text/css" href="/CSS/styleLogin.css" />
+</head>
+<body>
+  <div class="container" >    
+    <a class="links" id="paralogin"></a>
+    <a class="links" id="paracadastro"></a>
+     
+    <div class="content">      
+      <!--FORMULÁRIO DE CADASTRO-->
+      <div id="cadastro">
+        <form th:action="@{/cadastroCliente}" th:object="${cliente}"
+				 method='POST'>
+
+          <h1>Cadastro</h1> 
+           
+          <p> 
+            <label for="nome_completo">Seu nome</label>
+            <input th:field="*{nome_completo}"
+						id="nome_completo" name="nome_cad" required="required" type="text" placeholder="nome" />
+          </p>
+           
+          <p> 
+            <label for="email_cad">Seu e-mail</label>
+            <input th:field="*{username}" id="username" required="required" type="email" placeholder="contato@gmail.com"/> 
+          </p>
+           
+          <p> 
+            <label for="senha_cad">Sua senha</label>
+            <input th:field="*{password}" id="password" name="senha_cad" required="required" type="password" placeholder="ex. 1234"/>
+          </p>
+           
+          <p> 
+            <input type="submit" value="Cadastrar"/> 
+          </p>
+           
+          <p class="link">  
+            Já tem conta?
+            <a href="/loginCliente"> Ir para Login </a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>  
+</body>
+</html>

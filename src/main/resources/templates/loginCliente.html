@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:th="http://www.thymeleaf.org"
+xmlsn:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+    <title>Login - Game Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/f2150dbc67.js" crossorigin="anonymous"></script>
+  
+  <link rel="stylesheet" type="text/css" href="/CSS/styleLogin.css" />
+</head>
+<body>
+  <div class="container" >    
+     
+    <div class="content">      
+      <!--FORMULÁRIO DE LOGIN-->
+      <div id="login">
+        <form th:action="@{/loginCliente}" method="post">
+
+          <div th:if="${param.error}">
+              <div class="alert alert-danger"
+                 th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message} + ': Usuário e/ou inválidos!'">Usuário e/ou inválidos!</div>
+          </div>
+          <p> 
+            <label for="username">Email</label>
+            <input id="username" name="username" required="required" type="text" placeholder="contato@gmail.com"/>
+          </p>
+           
+          <p> 
+            <label for="password">Seu e-mail</label>
+            <input id="password" name="password" required="required" type="password" placeholder="SUA SENHA" /> 
+          </p>
+           
+          <p> 
+            <input type="checkbox" name="manterlogado" id="manterlogado" value="" /> 
+            <label for="manterlogado">Manter-me logado</label>
+          </p>
+           
+          <p> 
+            <button class="btn btn-primary">Login</button>
+          </p>
+           
+          <p class="link">
+            Ainda não tem conta?
+            <a href="/cadastroCliente">Cadastre-se</a>
+          </p>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>  
+</body>
+</html>
