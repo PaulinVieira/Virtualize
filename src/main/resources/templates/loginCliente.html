@@ -21,12 +21,8 @@ xmlsn:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <div class="content">      
       <!--FORMULÁRIO DE LOGIN-->
       <div id="login">
-        <form th:action="@{/loginCliente}" method="post">
+        <form th:action="@{/finalizarCompra/login}" method="POST">
 
-          <div th:if="${param.error}">
-              <div class="alert alert-danger"
-                 th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message} + ': Usuário e/ou inválidos!'">Usuário e/ou inválidos!</div>
-          </div>
           <p> 
             <label for="username">Email</label>
             <input id="username" name="username" required="required" type="text" placeholder="contato@gmail.com"/>

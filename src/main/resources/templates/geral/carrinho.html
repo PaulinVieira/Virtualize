@@ -50,17 +50,9 @@
 			<a class="nav-item nav-link active" href="#" style="color: white">JOGOS</a>
 			<a class="nav-item nav-link" href="#" style="color: white">ACESSÓRIOS</a>
 			<a class="nav-item nav-link" href="#" style="color: white">LANÇAMENTOS</a>
-			<security:authorize
-				access="hasAnyRole('administrador', 'estoquista')">
-				<a class="nav-item nav-link" href='/estoquista' style="color: white">PRODUTOS</a>
-			</security:authorize>
+			<a class="nav-item nav-link" href='/estoquista' style="color: white">PRODUTOS</a>
+			<a class="nav-item nav-link" href='/administrativo' style="color: white">USUARIOS</a>
 
-
-
-			<security:authorize access="hasRole('administrador')">
-				<a class="nav-item nav-link" href='/administrativo'
-					style="color: white">USUARIOS</a>
-			</security:authorize>
 		</nav>
 	</header>
 	<main>

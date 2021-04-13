@@ -37,23 +37,7 @@ public class Login_Controller {
 	}
 
 
-	@GetMapping("/cadastroCliente")
-	public ModelAndView exibirCadastroCliente(){
-
-		table_Cliente c = new table_Cliente();
-		ModelAndView mv = new ModelAndView("clientes/cadastroCliente");
-
-		mv.addObject("cliente", c);
-		return mv;
-	}
-
-	@PostMapping("/clientes/cadastroCliente")
-	public String cadastrarCliente(@ModelAttribute(value = "cliente") table_Cliente c) {
-
-		ClientesRepository clientesRepository = new ClientesRepository();
-		clientesRepository.salvar(c);
-		return "redirect:/finalizarCompra";
-	}
+	
 
 
 

@@ -3,6 +3,7 @@ package com.paulotec.virtualize.services;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -20,6 +21,7 @@ public class SecurityFuncionario extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
@@ -32,12 +34,17 @@ public class SecurityFuncionario extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()
-		.antMatchers("/administrativo/**").hasAuthority("administrador")
-		.antMatchers("/estoquista/**").hasAnyAuthority("administrador", "estoquista")
-		.and().formLogin().loginPage("/login").permitAll().and().logout()
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/home").and()
-		.exceptionHandling().accessDeniedPage("/negado");	
+		
+		
+		http.authorizeRequests().antMatchers("/login").permitAll()
+		.antMatchers("/administrativo/**").hasAnyAuthority("administrador")
+		.antMatchers("/estoquista/**").hasAnyAuthority("administrador","estoquista")
+		.and().formLogin().loginPage("/login").failureUrl("/login").loginProcessingUrl("/login")
+		.defaultSuccessUrl("/administrativo").usernameParameter("username").passwordParameter("password")
+		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.logoutSuccessUrl("/login").deleteCookies("JSESSIONID")
+		.and().exceptionHandling().accessDeniedPage("/negado")
+		.and().csrf().disable();	
 	
 	}
 
