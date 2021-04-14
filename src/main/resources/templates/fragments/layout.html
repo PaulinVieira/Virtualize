@@ -12,6 +12,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<script src="https://kit.fontawesome.com/f2150dbc67.js" crossorigin="anonymous"></script>
 	<!--Style-->
 	<link rel="stylesheet" type="text/css" href="/css/estilo.css">
+    <link rel="stylesheet" type="text/css" href="/CSS/estiloc.css">
 	<style>
 	#conteudo{
     width:500px;
@@ -53,13 +54,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			<a class="nav-item nav-link active" href="#" style="color: white">JOGOS</a>
 			<a class="nav-item nav-link" href="#" style="color: white">ACESSÓRIOS</a>
 			<a class="nav-item nav-link" href="#" style="color: white">LANÇAMENTOS</a>
-			<sec:authorize access="hasRole('administrativo') and hasRole('estoquista')">
-				<a class="nav-item nav-link" href='/estoquista' style="color: white">PRODUTOS</a>
-			</sec:authorize>
-						
-			<a class="nav-item nav-link"
-				href='/administrativo' style="color: white">USUARIOS</a>
-				
+			<a class="nav-item nav-link" href='/estoquista' style="color: white">PRODUTOS</a>
+			<a class="nav-item nav-link" href='/administrativo' style="color: white">USUARIOS</a>				
 		</nav>
 	</header>
 	<main>
@@ -107,21 +103,20 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 				<p>10% de desconto no boleto</p>
 			</div>
 		</div>
-		<div class="produto-titulo">
-			<h2>Mais Vendidos</h2>
-		</div>
 		<section class="layout-content" layout:fragment="corpo">
 		Principal
 		</section>
 	</main>
 	<!-- Footer -->
 	<footer class="page-footer">
+		<br>
+		<br>
 		<div class="container text-center text-md-left mt-5">
 			<div class="row mt-3">
 				<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
 					<h5 class="text-uppercase font-weight-bold">The GameStore</h5>
 					<hr class= "mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-					<p>Projeto Integrador IV - 2020</p>
+					<p>Projeto E-commerce CONSULTA</p>
 				</div>
 				<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
