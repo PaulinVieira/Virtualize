@@ -1,12 +1,6 @@
 package com.paulotec.virtualize.controller;
-
-import com.paulotec.virtualize.dao.ClientesRepository;
-import com.paulotec.virtualize.entity.table_Cliente;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -35,12 +29,5 @@ public class Login_Controller {
 		return mv;
 		
 	}
-
-
-	
-
-
-
-
 
 }

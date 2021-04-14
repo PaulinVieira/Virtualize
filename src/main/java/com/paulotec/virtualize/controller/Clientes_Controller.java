@@ -34,7 +34,7 @@ public class Clientes_Controller {
 		return mv;
 	}
 
-	@PostMapping("/clientes/cadastroCliente")
+	@PostMapping("/cadastroCliente")
 	public String cadastrarCliente(@ModelAttribute(value = "cliente") table_Cliente c) {
 
 		ClientesRepository clientesRepository = new ClientesRepository();

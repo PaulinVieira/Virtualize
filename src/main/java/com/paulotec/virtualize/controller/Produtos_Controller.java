@@ -6,14 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-
 import com.paulotec.virtualize.dao.ImagemProdutoRepository;
 import com.paulotec.virtualize.dao.PerguntaRespostaRepository;
 import com.paulotec.virtualize.dao.ProdutoRepository;
 import com.paulotec.virtualize.entity.ImagemProd;
 import com.paulotec.virtualize.entity.table_Pergunta_Resposta;
 import com.paulotec.virtualize.entity.table_Produtos;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

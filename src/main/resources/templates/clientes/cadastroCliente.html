@@ -3,7 +3,7 @@
   <meta charset="UTF-8" />
   <title>Login e Cadastro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  
+  <script type="text/javascript" href="/scripts.js"></script>
   <link rel="stylesheet" type="text/css" href="/CSS/styleLogin.css" />
 </head>
 <body>
@@ -33,6 +33,11 @@
           <p> 
             <label for="senha_cad">Sua senha</label>
             <input th:field="*{password}" id="password" name="senha_cad" required="required" type="password" placeholder="ex. 1234"/>
+          </p>
+
+          <p> 
+            <label for="CPF">Seu CPF</label>
+            <input th:field="*{cpf}" id="cpf" name="cpf" required="required" type="text" placeholder="ex. xxx.xxx.xxx-xx"/>
           </p>
            
           <p> 

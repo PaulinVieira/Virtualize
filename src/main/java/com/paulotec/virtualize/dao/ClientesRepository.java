@@ -22,10 +22,11 @@ public class ClientesRepository {
 
 		try {
 			stmt = con.prepareStatement(
-					"insert into table_Cliente (nome_completo, username, password) values (?,?,?);");
+					"insert into table_Cliente (nome_completo, username, password, cpf) values (?,?,?,?);");
 			stmt.setString(1, c.getNome_completo());
 			stmt.setString(2, c.getUsername());
 			stmt.setString(3, new BCryptPasswordEncoder().encode(c.getPassword()));
+			stmt.setString(4, c.getCpf());
 			stmt.executeUpdate();
 		} catch (SQLException ex) {
 			Logger.getLogger(ClientesRepository.class.getName()).log(Level.SEVERE, null, ex);
