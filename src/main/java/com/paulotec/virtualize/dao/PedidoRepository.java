@@ -169,12 +169,12 @@ public class PedidoRepository {
 		PreparedStatement stmt = null;
 
 		try {
-			stmt = con.prepareStatement("insert into table_Pedidos values(default, ?,default,?,?,?,?)",
+			stmt = con.prepareStatement("insert into table_Pedidos values(default,?,default,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 
-			stmt.setString(1, "CFP");
+			stmt.setString(1, p.getCliente().getCpf());
 			stmt.setDouble(2, p.getTotalPedido());
-			stmt.setString(3, "Boleto");
+			stmt.setString(3, "teste");
 			p.setRandomNumPedido();
 			stmt.setInt(4, p.getNumeroPedido());
 			stmt.setString(5, "Aguardando pagamento");
