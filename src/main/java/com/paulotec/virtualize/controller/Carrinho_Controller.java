@@ -80,24 +80,34 @@ public class Carrinho_Controller {
 	}
 
 	@GetMapping("/carrinho")
-	public ModelAndView showView() {
+	public ModelAndView showView(RedirectAttributes attrib) {
+
+		if(itensCompra.isEmpty()){			
+			attrib.addFlashAttribute("msgAlerta", "O carrinho está vazio. Impossível continuar");
+
+		}
 		ModelAndView mv = new ModelAndView("geral/carrinho");
-		//ao mostrar mostrar o carrinho, cálculo o total, assim, verificará se o carrinho nao está vazio
-		calcularTotal();
 		mv.addObject("compra", compra);
 		mv.addObject("listaItens", itensCompra);
 		return mv;
+	
 	}
 
 	@GetMapping("/finalizarCompra")
-	public ModelAndView finalizarCompra() {
-		buscarUsuarioLogado();
+	public ModelAndView finalizarCompra(RedirectAttributes attrib) {
+
+
+		if(!itensCompra.isEmpty()){
+			buscarUsuarioLogado();
 		ModelAndView mv = new ModelAndView("geral/finalizarCompra");
 		calcularTotal();
 		mv.addObject("compra", compra);
 		mv.addObject("listaItens", itensCompra);
 		mv.addObject("cliente", cliente);
 		return mv;
+		}
+	
+		return showView(attrib);		
 	}
 
 	@GetMapping("/salvarPedido")

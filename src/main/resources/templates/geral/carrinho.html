@@ -11,6 +11,7 @@
 		</div>
 		
 		<div th:if="${msgSucesso != null}" th:text="${msgSucesso}" class="alert alert-success" role="alert"></div>
+		<div th:if="${msgAlerta != null}" th:text="${msgAlerta}" class="alert alert-warning" role="alert"></div>		
 		<div class="container pb-5 mt-n2 mt-md-n">
 			<div class="row">
 				<div class="col">
@@ -34,7 +35,7 @@
 								alt="Product"></a>
 
 							<div class="media-body pt-3">
-								<h3 th:text="${item.table_Produtos.descricao}"
+								<h3 id = "desc" th:text="${item.table_Produtos.descricao}"
 									class="product-card-title font-weight-semibold border-0 pb-0">
 									<a href="#"></a>
 								</h3>
@@ -123,8 +124,8 @@
 						</div>
 						<hr>
 
-						<a class="btn btn-primary btn-block" th:href="finalizarCompra">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+						<a  class="btn btn-primary btn-block" th:href="finalizarCompra">
+							<svg id="botao" width="24" height="24" viewBox="0 0 24 24" fill="none"
 								stroke="currentColor" stroke-width="2" stroke-linecap="round"
 								stroke-linejoin="round" class="feather feather-credit-card mr-2">
 											<rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
