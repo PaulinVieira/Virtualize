@@ -123,6 +123,13 @@ public class Produtos_Controller {
 	public ModelAndView adicionarProduto(@ModelAttribute(value = "produto") table_Produtos p,
 			@RequestParam("file") MultipartFile arquivo, RedirectAttributes redirAttr) {
 
+			//verifico se meu caminho existe(caminho que salvarei os arquivos)
+		File f = new File(caminhoImagens);
+		//se nao existir, eu crio, para nao ter problema quando for salvar o produto
+		if(!f.exists() && !f.isDirectory()) { 
+			boolean success = (new File("C:/imagens").mkdir());		 
+		}
+
 		ProdutoRepository produtoRepository = new ProdutoRepository();
 
 		table_Produtos tableProdutos = new table_Produtos();
@@ -140,7 +147,7 @@ public class Produtos_Controller {
 				redirAttr.addFlashAttribute("msgSucesso", "Produto salvo com sucesso");
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			e.getStackTrace();
 		}
 		ModelAndView mv = new ModelAndView("redirect:/estoquista");
 		

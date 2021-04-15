@@ -82,14 +82,17 @@ public class Carrinho_Controller {
 	@GetMapping("/carrinho")
 	public ModelAndView showView(RedirectAttributes attrib) {
 
-		if(itensCompra.isEmpty()){			
-			attrib.addFlashAttribute("msgAlerta", "O carrinho está vazio. Impossível continuar");
-
-		}
 		ModelAndView mv = new ModelAndView("geral/carrinho");
-		mv.addObject("compra", compra);
-		mv.addObject("listaItens", itensCompra);
+		if((!itensCompra.isEmpty())){			
+			mv.addObject("compra", compra);
+			mv.addObject("listaItens", itensCompra);
+			return mv;
+		
+		}
+		attrib.addFlashAttribute("msgAlerta", "O carrinho está vazio. Impossível continuar");
 		return mv;
+		
+
 	
 	}
 
