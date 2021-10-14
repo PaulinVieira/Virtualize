@@ -11,11 +11,10 @@ import java.util.logging.Logger;
 
 public class ConnectionBancoDados {
 
-
 	    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	    private static final String URL = "jdbc:mysql://localhost:3306/lojavirtual?useTimezone=true&serverTimezone=UTC";
 	    private static final String USER = "root";
-	    private static final String PASSWORD = "senac";
+	    private static final String PASSWORD = "admin";
 
 	    public static Connection obterConexao() {
 		try {

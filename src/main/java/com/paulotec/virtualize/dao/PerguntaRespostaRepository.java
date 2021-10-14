@@ -47,6 +47,8 @@ public class PerguntaRespostaRepository {
 
 	      while (rs.next()) {
 	        table_Pergunta_Resposta pr = new table_Pergunta_Resposta();
+			
+
 	        pr.setId_perguntaResposta(rs.getInt("id_perguntaResposta"));
 	        pr.setId_produto(id_produto);
 	        pr.setPergunta(rs.getString("pergunta"));
